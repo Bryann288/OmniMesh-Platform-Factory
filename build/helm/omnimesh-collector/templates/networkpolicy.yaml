@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: omnimesh-collector-zero-trust
+  namespace: datamash-ingest
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: omnimesh-collector
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              omnimesh.io/trusted-gateway: "true"
+      ports:
+        - protocol: TCP
+          port: 8443
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              omnimesh.io/databricks-privatelink: "true"
+      ports:
+        - protocol: TCP
+          port: 443

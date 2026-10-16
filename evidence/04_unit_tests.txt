@@ -1,0 +1,8 @@
+test_medallion_pii_tokenization_and_zero_leak (test_omnimesh_factory.TestOmniMeshPlatformFactory) ... ok
+test_vlsm_zero_cidr_collisions_across_clouds (test_omnimesh_factory.TestOmniMeshPlatformFactory) ... ok
+test_zero_trust_artifacts_generated (test_omnimesh_factory.TestOmniMeshPlatformFactory) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.030s
+
+OK

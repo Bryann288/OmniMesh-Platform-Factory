@@ -1,0 +1,29 @@
+==============================================================================================
+🌐 OMNIMESH PLATFORM FACTORY — MULTI-CLOUD VLSM NETWORK ALLOCATION TABLE
+==============================================================================================
+DOMAIN               | CLOUD | REGION     | TIER                  | CIDR             | HOSTS  | ZERO-TRUST POLICY
+----------------------------------------------------------------------------------------------
+payments-core        | AWS   | us-east-1  | spark-compute         | 10.100.0.0/23    |    507 | PRIVATE_ISOLATED_KMS
+fraud-risk-engine    | AZURE | westeurope | spark-compute         | 10.200.0.0/23    |    507 | PRIVATE_ISOLATED_KMS
+settlement-ledger    | AWS   | us-east-1  | spark-compute         | 10.100.2.0/24    |    251 | PRIVATE_ISOLATED_KMS
+payments-core        | AWS   | us-east-1  | k8s-ingest            | 10.100.3.0/24    |    251 | ZERO_TRUST_INGRESS
+fraud-risk-engine    | AZURE | westeurope | k8s-ingest            | 10.200.2.0/25    |    123 | ZERO_TRUST_INGRESS
+settlement-ledger    | AWS   | us-east-1  | k8s-ingest            | 10.100.4.0/25    |    123 | ZERO_TRUST_INGRESS
+payments-core        | AWS   | us-east-1  | privatelink-endpoints | 10.100.4.128/26  |     59 | NO_PUBLIC_INTERNET
+fraud-risk-engine    | AZURE | westeurope | privatelink-endpoints | 10.200.2.128/26  |     59 | NO_PUBLIC_INTERNET
+settlement-ledger    | AWS   | us-east-1  | privatelink-endpoints | 10.100.4.192/27  |     27 | NO_PUBLIC_INTERNET
+==============================================================================================
+✔ Compiled Terraform Bundle : build/terraform/main.tf
+✔ Compiled Helm K8s Chart   : build/helm/omnimesh-collector
+✔ Compiled Databricks DAB   : build/databricks/databricks.yml
+
+==============================================================================================
+🧱 DATABRICKS MEDALLION LAKEHOUSE EXECUTION (BRONZE ➔ SILVER ➔ GOLD)
+==============================================================================================
+  • Bronze Raw Events Ingested       : 5,000 records (via PrivateLink)
+  • Data Contract Quarantine (DLQ)   : 100 malformed records blocked
+  • Silver Verified & Normalized     : 4,900 records
+  • PII Fields Tokenized (SHA-256)   : 9,800 sensitive fields masked
+  • Gold Layer Domain Aggregations   : {"payments-core": 532972.25, "fraud-risk-engine": 533067.0, "settlement-ledger": 532910.75}
+  • Zero-Leak Memory Gate (tracemalloc): Peak 14.86 KB | Net Retained 3.10 KB ➔ PASS
+==============================================================================================

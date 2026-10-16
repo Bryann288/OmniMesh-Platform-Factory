@@ -1,0 +1,32 @@
+bundle:
+  name: omnimesh_lakehouse_factory
+
+workspace:
+  host: https://adb-novapay-zero-trust.azuredatabricks.net
+
+resources:
+  jobs:
+    medallion_zero_trust_pipeline:
+      name: "[PROD] OmniMesh Medallion Pipeline (Bronze -> Silver -> Gold)"
+      tasks:
+        - task_key: ingest_bronze_privatelink
+          spark_python_task:
+            python_file: ./src/medallion_pipeline.py
+            parameters: ["--layer", "bronze", "--enforce-privatelink"]
+        - task_key: enforce_contract_and_mask_silver
+          depends_on:
+            - task_key: ingest_bronze_privatelink
+          spark_python_task:
+            python_file: ./src/medallion_pipeline.py
+            parameters: ["--layer", "silver", "--pii-hash", "sha256"]
+        - task_key: aggregate_domain_gold
+          depends_on:
+            - task_key: enforce_contract_and_mask_silver
+          spark_python_task:
+            python_file: ./src/medallion_pipeline.py
+            parameters: ["--layer", "gold", "--catalog", "novapay_unity_prod"]
+
+targets:
+  prod:
+    mode: production
+    default: true

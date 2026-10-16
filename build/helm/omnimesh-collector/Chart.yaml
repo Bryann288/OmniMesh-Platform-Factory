@@ -1,0 +1,7 @@
+apiVersion: v2
+name: omnimesh-collector
+description: Zero-Trust Edge Telemetry & Data Mesh Ingestion Collector
+type: application
+version: 1.4.0
+appVersion: "2.8.0"
+icon: https://helm.sh/img/helm.svg

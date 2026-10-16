@@ -1,0 +1,12 @@
+replicaCount: 3
+image:
+  repository: registry.k8s.io/omnimesh/collector
+  tag: "v2.8.0-distroless"
+  pullPolicy: IfNotPresent
+resources:
+  limits:
+    cpu: "500m"
+    memory: "512Mi"
+  requests:
+    cpu: "250m"
+    memory: "256Mi"

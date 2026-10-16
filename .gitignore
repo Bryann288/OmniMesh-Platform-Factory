@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+subir_github.sh
+POST_LINKEDIN_OMNIMESH.md
+Carrusel_LinkedIn_OmniMesh.pdf
+Video_Demo_OmniMesh_LinkedIn.mp4

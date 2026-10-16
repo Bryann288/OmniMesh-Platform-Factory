@@ -1,0 +1,49 @@
+{
+  "platform_name": "OmniMesh Enterprise Data & Network Factory",
+  "organization": "NovaPay Global Fintech (Reference Architecture)",
+  "security_posture": {
+    "zero_trust_enforced": true,
+    "allow_public_egress": false,
+    "kms_cmk_required": true,
+    "pii_tokenization_algorithm": "SHA-256",
+    "compliance_frameworks": ["PCI-DSS-v4.0", "SOC2-Type-II", "ISO-27001"]
+  },
+  "global_network_pools": {
+    "aws_hub_supernet": "10.100.0.0/16",
+    "azure_hub_supernet": "10.200.0.0/16",
+    "backbone_asn_aws": 65110,
+    "backbone_asn_azure": 65210
+  },
+  "domains": [
+    {
+      "domain_id": "payments-core",
+      "cloud": "aws",
+      "region": "us-east-1",
+      "compute_hosts_required": 450,
+      "ingest_hosts_required": 180,
+      "privatelink_endpoints": 40,
+      "pii_fields": ["card_pan", "customer_tax_id", "iban_account"],
+      "sla_tier": "PLATINUM_CRITICAL"
+    },
+    {
+      "domain_id": "fraud-risk-engine",
+      "cloud": "azure",
+      "region": "westeurope",
+      "compute_hosts_required": 380,
+      "ingest_hosts_required": 120,
+      "privatelink_endpoints": 30,
+      "pii_fields": ["device_fingerprint_raw", "customer_tax_id", "ip_source"],
+      "sla_tier": "PLATINUM_CRITICAL"
+    },
+    {
+      "domain_id": "settlement-ledger",
+      "cloud": "aws",
+      "region": "us-east-1",
+      "compute_hosts_required": 220,
+      "ingest_hosts_required": 90,
+      "privatelink_endpoints": 24,
+      "pii_fields": ["merchant_bank_routing", "customer_tax_id"],
+      "sla_tier": "GOLD_PRODUCTION"
+    }
+  ]
+}

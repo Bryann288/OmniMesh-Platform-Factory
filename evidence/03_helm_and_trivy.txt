@@ -1,0 +1,23 @@
+==> Linting build/helm/omnimesh-collector
+
+1 chart(s) linted, 0 chart(s) failed
+2026-10-16T14:51:34-05:00	INFO	[misconfig] Misconfiguration scanning is enabled
+2026-10-16T14:51:34-05:00	INFO	[checks-client] Using existing checks from cache	path="/home/architect/.cache/trivy/policy/content"
+2026-10-16T14:51:35-05:00	INFO	[terraform scanner] Scanning root module	file_path="terraform"
+2026-10-16T14:51:35-05:00	INFO	Detected config files	num=3
+
+Report Summary
+
+┌──────────────────────────────────────────────────────┬────────────┬───────────────────┐
+│                        Target                        │    Type    │ Misconfigurations │
+├──────────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ helm/omnimesh-collector/templates/deployment.yaml    │    helm    │         0         │
+├──────────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ helm/omnimesh-collector/templates/networkpolicy.yaml │ kubernetes │         0         │
+├──────────────────────────────────────────────────────┼────────────┼───────────────────┤
+│ terraform                                            │ terraform  │         0         │
+└──────────────────────────────────────────────────────┴────────────┴───────────────────┘
+Legend:
+- '-': Not scanned
+- '0': Clean (no security findings detected)
+
